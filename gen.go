@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+
+	"local/randomize"
 )
 
 func main() {
@@ -33,11 +35,6 @@ func main() {
 	// Unmarshal JSON to the interface
 	json.Unmarshal([]byte(byteValue), &results)
 
-	for _, v := range results {
-		fmt.Println("--------")
-		//Reading each value by its key
-		fmt.Printf("|Name: %s|\n", v["name"])
-		fmt.Printf("|Email: %s|\n", v["email"])
-	}
-
+	g := randomize.PickSanta(results)
+	fmt.Println(g)
 }
