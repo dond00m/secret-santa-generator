@@ -1,35 +1,18 @@
 package randomize
 
 import (
-	"fmt"
 	"log"
 	"math/rand"
 	"time"
 )
 
-// PickSanta processes provided list to pair santas
-func PickSanta(names []map[string]interface{}) string {
+// MatchSanta processes provided list to pair santas
+func MatchSanta(santaIndex int, names []map[string]interface{}) int {
 	log.SetPrefix("Randomizer-pickSanta: ")
-	log.Output(1, "Picking Santas...")
+	log.Printf("Finding match for %s...", names[santaIndex]["name"])
 
-	// Make sure we have an even amount of Santas to pair off
-	if !(len(names)%2 == 0) {
-		log.Fatal("There are an odd number of santas. Must be even, current santa count:", (len(names)))
-	}
-
-	fmt.Println(names)
-	fmt.Println(len(names))
-	fmt.Println(names[rand.Intn(len(names))])
-	fmt.Println("+++++++")
-
-	// Loop by each map element
-	for i, v := range names {
-		personMatch := findMatch(i, len(names))
-		fmt.Println("--------")
-		fmt.Printf("|%s : %s|\n", v["name"], names[personMatch]["name"])
-	}
-
-	return "foo"
+	matchIndex := findMatch(santaIndex, len(names))
+	return matchIndex
 }
 
 func findMatch(exclude int, total int) int {
