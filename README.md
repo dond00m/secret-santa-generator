@@ -11,7 +11,7 @@ Generate secret santa assignments for your family and friends
     mv ./example.config.json ./config.json
     ```
 
-2. Set auth variables
+2. Set auth environment variables
     - `HERMES_SENDER_EMAIL`
     - `HERMES_SENDER_PASSWORD`
 
@@ -21,7 +21,7 @@ Generate secret santa assignments for your family and friends
 
 4. Run the generator
 
-  ```
-  go run gen.go
-  ```
+    ```
+    go run gen.go
+    ```
 
