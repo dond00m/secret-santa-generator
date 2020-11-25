@@ -10,14 +10,6 @@ import (
 	"os"
 )
 
-// type santaPair struct {
-// 	santaName         string
-// 	santaEmail        string
-// 	receipentName     string
-// 	receipentEmail    string
-// 	receipentWishlist string
-// }
-
 func main() {
 	// Set properties of the predefined Logger, including
 	// the log entry prefix and a flag to disable printing
@@ -52,7 +44,7 @@ func main() {
 
 	for i, v := range santas {
 		fmt.Println("--------")
-		// Initialize struct
+		// Initialize pair struct
 		p := notify.SantaPair{}
 		// Type assertion record to map
 		santa := randomize.ConvertMap(v)
