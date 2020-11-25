@@ -4,11 +4,19 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"local/notify"
+	"local/randomize"
 	"log"
 	"os"
-
-	"local/randomize"
 )
+
+// type santaPair struct {
+// 	santaName         string
+// 	santaEmail        string
+// 	receipentName     string
+// 	receipentEmail    string
+// 	receipentWishlist string
+// }
 
 func main() {
 	// Set properties of the predefined Logger, including
@@ -44,38 +52,22 @@ func main() {
 
 	for i, v := range santas {
 		fmt.Println("--------")
-		fmt.Println(matchedSantas)
-		personMatch := convertMap(santas[randomize.MatchSanta(i, santas)])
-		if Find(matchedSantas, personMatch["name"]) == false {
-			log.Output(1, "Valid match!")
-			fmt.Printf("|%s : %v,%s|\n", v["name"], personMatch["name"], personMatch["email"])
-			matchedSantas = append(matchedSantas, personMatch["name"])
-		} else {
-			log.Printf("%s already matched, re-rolling", personMatch["name"])
-			personMatch := convertMap(santas[randomize.MatchSanta(i, santas)])
-			fmt.Printf("|%s : %v,%s|\n", v["name"], personMatch["name"], personMatch["email"])
-
-		}
+		// Initialize struct
+		p := notify.SantaPair{}
+		// Type assertion record to map
+		santa := randomize.ConvertMap(v)
+		// Get match record
+		match := randomize.MatchSanta(i, santas, matchedSantas)
+		// Update matched santa slice
+		matchedSantas = append(matchedSantas, match["name"])
+		log.Printf("%s is the secret santa for: %s", santa["name"], match["name"])
+		// Combine santa and their match to struct
+		p.SantaName = santa["name"]
+		p.SantaEmail = santa["email"]
+		p.ReceipentName = match["name"]
+		p.ReceipentEmail = match["email"]
+		p.ReceipentAddress = match["address"]
+		p.ReceipentWishlist = match["wishlist"]
+		notify.SendEmail(p)
 	}
-}
-
-// Handle type assertion for map interface
-func convertMap(originalMap interface{}) map[string]string {
-	convertedMap := map[string]string{}
-	for key, value := range originalMap.(map[string]interface{}) {
-		convertedMap[key] = value.(string)
-	}
-	return convertedMap
-}
-
-// Find takes a slice and looks for an element in it. If found it will
-// return it's key, otherwise it will return -1 and a bool of false.
-func Find(slice []string, val interface{}) bool {
-	log.Printf("Checking if %s has already been picked..", val)
-	for _, item := range slice {
-		if item == val {
-			return true
-		}
-	}
-	return false
 }
