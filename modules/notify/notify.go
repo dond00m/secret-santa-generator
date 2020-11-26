@@ -47,7 +47,7 @@ func SendEmail(pair SantaPair) {
 	smtpConfig := smtpAuthentication{
 		Server:         "smtp.gmail.com",
 		Port:           465,
-		SenderIdentity: "Secret Cow Santa",
+		SenderIdentity: "Secret Santa Cow",
 		SenderEmail:    os.Getenv("HERMES_SENDER_EMAIL"),
 		SMTPPassword:   os.Getenv("HERMES_SMTP_PASSWORD"),
 		SMTPUser:       os.Getenv("HERMES_SENDER_EMAIL"),
@@ -63,7 +63,7 @@ func SendEmail(pair SantaPair) {
 		// Theme: new(Default)
 		Product: hermes.Product{
 			// Appears in header & footer of e-mails
-			Name: "Secret Cow Santa",
+			Name: "Secret Santa Cow",
 			// Optional product logo
 			Logo: "https://i.imgur.com/iM0h7Cd.jpeg",
 		},
@@ -118,6 +118,7 @@ func SendEmail(pair SantaPair) {
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Printf("Sending email to %s...", pair.SantaEmail)
 	err = send(smtpConfig, options, string(htmlBytes))
 	if err != nil {
