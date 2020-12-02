@@ -1,10 +1,14 @@
 [
     {
         "name": "Robert",
-        "email": "woods@td.com"
+        "email": "woods@td.com",
+        "wishlist": "Non Provided",
+        "address": "1000 S Prairie Ave, Inglewood, CA 90301"
     },
     {
         "name": "Coop",
-        "email": "kupp@td.com"
+        "email": "kupp@td.com",
+        "wishlist": "https://www.amazon.com/hz/wishlist/ls/example?ref_=wl_share",
+        "address": "1000 S Prairie Ave, Inglewood, CA 90301"
     }
 ]
