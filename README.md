@@ -13,7 +13,7 @@ Generate secret santa assignments for your family and friends
 
 2. Set auth environment variables
     - `HERMES_SENDER_EMAIL`
-    - `HERMES_SENDER_PASSWORD`
+    - `HERMES_SMTP_PASSWORD`
 
 3. [Allow user/password authentication](https://myaccount.google.com/lesssecureapps) on your Gmail account 
    
