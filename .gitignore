@@ -11,3 +11,4 @@
 # Local config
 config.json
 *.html
+example.config.json
